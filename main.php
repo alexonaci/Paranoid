@@ -57,8 +57,11 @@
 $dir = 'sqlite:/var/db/arduino.db';
 $db  = new PDO($dir) or die("cannot open the database");
 $result = $db->query('select status FROM sensor1');
-print "<div>"THE STATE IS .$result."</div>";
-
+foreach($result as $row)
+{
+  $state = $row['status'];
+}
+print "<p>ceva</p>"
 $db = NULL;
 ?> 
 <script type="text/javascript" src="http://code.jquery.com/jquery-2.2.1.min.js"></script>
