@@ -34,6 +34,14 @@
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
+<script>
+
+function eccoHello()
+{
+        alert("hello" + "sjkdhfk");
+}
+</script>
+
 <?php
 $dir = 'sqlite:/var/db/arduino.db';
 $db  = new PDO($dir) or die("cannot open the database");
