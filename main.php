@@ -42,30 +42,29 @@ foreach($result as $row)
 {
   $state = $row['status'];
 }
-$db = NULL;
-if ($state == 1)
+if ($state == 0)
 $becpath = "on.png";
 else
 $becpath = "off.png";
 
-print " <div id\"cont3\" class=\"container\">"
-print "  <div class=\"row text-center\">"
-print "    <div class=\"col-sm-6\" class=\"jobs\">"
-print "      <h2 class=\"header-default\" class=\"jobs-header\">Light</h2>"
-print "      <div class=\"cont-4-font\">"
-print "      	<img src=".$becpath.">"
-  	
-print "      </div>"
-print "    </div>"
-print "    <div class=\"col-sm-6\" class=\"jobs\">"
-print "      <h2 class=\"header-default\" class=\"jobs-header\">TV</h2>"
-print "      <div class=\"cont-4-font\">Status:"
-print "      <button type=\"button\" id=\"btn-tv-off\" class=\"btn btn-default\">Off</button>"
-print "      </div>"
-print "    </div>"
-print "  </div>"
-print "</div>"
+$db = NULL;
 
+echo " <div id\"cont3\" class=\"container\">";
+echo "  <div class=\"row text-center\">";
+echo "    <div class=\"col-sm-6\" class=\"jobs\">";
+echo "      <h2 class=\"header-default\" class=\"jobs-header\">Light</h2>";
+echo "      <div class=\"cont-4-font\">";
+echo "      	<img src=".$becpath.">";
+echo "      </div>";
+echo "    </div>";
+echo "    <div class=\"col-sm-6\" class=\"jobs\">";
+echo "      <h2 class=\"header-default\" class=\"jobs-header\">TV</h2>";
+echo "      <div class=\"cont-4-font\">Status:";
+echo "      <button type=\"button\" id=\"btn-tv-off\" class=\"btn btn-default\">Off</button>";
+echo "      </div>";
+echo "    </div>";
+echo "  </div>";
+echo "</div>";
 
 ?>
 <script type="text/javascript" src="http://code.jquery.com/jquery-2.2.1.min.js"></script>
