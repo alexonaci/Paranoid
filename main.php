@@ -36,11 +36,16 @@
 </nav>
 <script>
 
+
 function eccoHello()
 {
-        alert("hello" + "sjkdhfk");
-}
+$.get("http://192.168.1.88/hackaton/test.php")
+                .success( function(data){
+                        $("#test").html(data);
+                });
+ }
 </script>
+
 
 <?php
 $dir = 'sqlite:/var/db/arduino.db';
