@@ -39,7 +39,7 @@
 
 function eccoHello()
 {
-$.get("http://192.168.1.88/hackaton/test.php")
+$.get("http://192.168.1.88/hackaton/relay.php")
                 .success( function(data){
                         $("#test").html(data);
                 });
@@ -61,24 +61,6 @@ else
 $becpath = "off.png";
 
 $db = NULL;
-
-echo " <div id\"cont3\" class=\"container\">";
-echo "  <div class=\"row text-center\">";
-echo "    <div class=\"col-sm-6\" class=\"jobs\">";
-echo "      <h2 class=\"header-default\" class=\"jobs-header\">Light</h2>";
-echo "      <div class=\"cont-4-font\">";
-echo "      	<img src=".$becpath.">";
-echo "      </div>";
-echo "    </div>";
-echo "    <div class=\"col-sm-6\" class=\"jobs\">";
-echo "      <h2 class=\"header-default\" class=\"jobs-header\">TV</h2>";
-echo "      <div class=\"cont-4-font\">Status:";
-echo "      <button type=\"button\" id=\"btn-tv-off\" class=\"btn btn-default\">Off</button>";
-echo "       <button onclick=\"eccoHello()\">Say Hello</button>";
-echo "      </div>";
-echo "    </div>";
-echo "  </div>";
-echo "</div>";
 
 ?>
 <script type="text/javascript" src="http://code.jquery.com/jquery-2.2.1.min.js"></script>
