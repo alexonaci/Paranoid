@@ -10,8 +10,8 @@ def open_serial_port():
 	return s
 
 def read_temperature(s):
-  line = s.readline();
-  return int(line)
+	line = s.readline();
+	return int(line)
 
 # store the temperature in the database
 def log_temperature(temp):
