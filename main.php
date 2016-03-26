@@ -29,30 +29,11 @@
       <!-- <ul class="nav navbar-nav navbar-right">
         <li><a href="#">Sign up <i class="fa fa-user-plus"></i></a></li>
         <li><a href="#">Log in <i class="fa fa-user"></i></a></li>
-       
+
       </ul> -->
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
-
-<div id="cont3" class="container">
-  <div class="row text-center">
-    <div class="col-sm-6" class="jobs">
-      <h2 class="header-default" class="jobs-header">Light</h2>
-      <div class="cont-4-font">
-      	<div id="state">
-      		
-      	</div>
-      </div>
-    </div>
-    <div class="col-sm-6" class="jobs">
-      <h2 class="header-default" class="jobs-header">TV</h2>
-      <div class="cont-4-font">Status:
-      <button type="button" id="btn-tv-off" class="btn btn-default">Off</button>
-      </div>
-    </div>
-  </div>
-</div>
 <?php
 $dir = 'sqlite:/var/db/arduino.db';
 $db  = new PDO($dir) or die("cannot open the database");
@@ -60,10 +41,33 @@ $result = $db->query('select status FROM sensor1');
 foreach($result as $row)
 {
   $state = $row['status'];
-}  
-print $state;
+}
 $db = NULL;
-?> 
+if ($state == 1)
+$becpath = "on.png";
+else
+$becpath = "off.png";
+
+print " <div id\"cont3\" class=\"container\">"
+print "  <div class=\"row text-center\">"
+print "    <div class=\"col-sm-6\" class=\"jobs\">"
+print "      <h2 class=\"header-default\" class=\"jobs-header\">Light</h2>"
+print "      <div class=\"cont-4-font\">"
+print "      	<img src=".$becpath.">"
+  	
+print "      </div>"
+print "    </div>"
+print "    <div class=\"col-sm-6\" class=\"jobs\">"
+print "      <h2 class=\"header-default\" class=\"jobs-header\">TV</h2>"
+print "      <div class=\"cont-4-font\">Status:"
+print "      <button type=\"button\" id=\"btn-tv-off\" class=\"btn btn-default\">Off</button>"
+print "      </div>"
+print "    </div>"
+print "  </div>"
+print "</div>"
+
+
+?>
 <script type="text/javascript" src="http://code.jquery.com/jquery-2.2.1.min.js"></script>
 <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 </body>
