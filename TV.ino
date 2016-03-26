@@ -1,23 +1,16 @@
 /*
- * IRremote: IRrecvDump - dump details of IR codes with IRrecv
- * An IR detector/demodulator must be connected to the input RECV_PIN.
- * Version 0.1 July, 2009
- * Copyright 2009 Ken Shirriff
- * http://arcfn.com
- * JVC and Panasonic protocol added by Kristian Lauszus (Thanks to zenwheel and other people at the original blog post)
- * LG added by Darryl Smith (based on the JVC protocol)
+ * SmartHome
+ * TV
+ * 
  */
 
 #include <IRremote.h>
 
-/* 
-*  Default is Arduino pin D11. 
-*  You can change this to another available Arduino Pin.
-*  Your IR receiver should be connected to the pin defined here
-*/
 int RECV_PIN = 11; 
-int led_pin = 5;
 int pinon = 0;
+int redPin = 5;
+int greenPin = 7;
+int bluePin = 6;
 IRsend irsend;
 IRrecv irrecv(RECV_PIN);
 
@@ -26,13 +19,15 @@ decode_results results;
 void setup()
 {
   Serial.begin(9600);
-  irrecv.enableIRIn(); // Start the receiver
-  pinMode(led_pin, OUTPUT);
-  
+  irrecv.enableIRIn();  // Start the receiver
+  pinMode(redPin, OUTPUT);
+  pinMode(greenPin, OUTPUT);
+  pinMode(bluePin, OUTPUT); 
 }
 
 
-void dump(decode_results *results) {
+void dump(decode_results *results) 
+{
   // Dumps out the decode_results structure.
   // Call this after IRrecv::decode()
   int count = results->rawlen;
@@ -90,19 +85,25 @@ void dump(decode_results *results) {
   Serial.println();
 }
 
-void loop() {
- 
-  if (irrecv.decode(&results)) {
+void setColor(int red, int green, int blue)
+{
+  analogWrite(redPin, red);
+  analogWrite(greenPin, green);
+  analogWrite(bluePin, blue);  
+}
+
+void loop() 
+{
+  if (irrecv.decode(&results)) 
+  {
     Serial.println(results.value, HEX);
     if(results.value == 0xFE50AF)
     pinon=!pinon;  
     irrecv.resume(); // Receive the next value
     Serial.println(pinon);
   }
-   if(pinon)
-      digitalWrite(led_pin, HIGH);
-    else
-      digitalWrite(led_pin, LOW);
-
-  
+  if (pinon)
+    setColor(0, 255, 0);  // green
+  else
+    setColor(255, 0, 0);  // red
 }
