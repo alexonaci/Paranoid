@@ -1,25 +1,17 @@
 from serial import Serial
+from time import sleep
 import sqlite3
 
 serial_port = '/dev/ttyACM0';
 serial_bauds = 9600;
 
-def open_serial_port():
-	s = Serial(serial_port, serial_bauds);
-	line = s.readline();
-	return s
-
-def read_temperature(s):
-	line = s.readline();
-	return int(line)
-
 # store the temperature in the database
-def log_temperature(temp):
+def log_light(value):
 
     conn=sqlite3.connect('/var/db/arduino.db')
     curs=conn.cursor()
 
-    curs.execute("UPDATE sensor1 set status = (?)", (temp))
+    curs.execute("UPDATE sensor1 set status = (?)", (value))
 
     # commit the changes
     conn.commit()
@@ -27,8 +19,20 @@ def log_temperature(temp):
     conn.close()
 
 def main():
-	s = open_serial_port()
-	temperature = read_temperature(s)
-	log_temperature(temperature)
+	s = Serial(serial_port, serial_bauds);
+	ser.write('T');
+	sleep(0.05);
+	line = s.readline();
+	temperature = line;
+	ser.write('H');
+	sleep(0.05);
+	line = s.readline();
+	humidity = line;
+	ser.write('L');
+	sleep(0.05);
+	line = s.readline();
+	light = line;
+	log_light(light);
+
 	if __name__=="__main__":
 		main()
