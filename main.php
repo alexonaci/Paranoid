@@ -60,8 +60,8 @@ $result = $db->query('select status FROM sensor1');
 foreach($result as $row)
 {
   $state = $row['status'];
-}
-print "<p>ceva</p>"
+}  
+print $state;
 $db = NULL;
 ?> 
 <script type="text/javascript" src="http://code.jquery.com/jquery-2.2.1.min.js"></script>
