@@ -11,7 +11,7 @@ def log_light(value):
     conn=sqlite3.connect('/var/db/arduino.db')
     curs=conn.cursor()
 
-    curs.execute("UPDATE sensor1 set status = (?)", (value))
+    curs.execute("UPDATE sensor1 set status = (?)", (value,))
 
     # commit the changes
     conn.commit()
@@ -20,15 +20,15 @@ def log_light(value):
 
 def main():
 	s = Serial(serial_port, serial_bauds);
-	ser.write('T');
+	s.write('T');
 	sleep(0.05);
 	line = s.readline();
 	temperature = line;
-	ser.write('H');
+	s.write('H');
 	sleep(0.05);
 	line = s.readline();
 	humidity = line;
-	ser.write('L');
+	s.write('L');
 	sleep(0.05);
 	line = s.readline();
 	light = line;
