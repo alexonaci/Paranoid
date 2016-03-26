@@ -57,7 +57,7 @@
 $dir = 'sqlite:/var/db/arduino.db';
 $db  = new PDO($dir) or die("cannot open the database");
 $result = $db->query('select status FROM sensor1');
-print $result;
+print "<div>"THE STATE IS .$result."</div>";
 
 $db = NULL;
 ?>
