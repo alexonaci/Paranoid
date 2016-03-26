@@ -61,6 +61,7 @@ echo "    <div class=\"col-sm-6\" class=\"jobs\">";
 echo "      <h2 class=\"header-default\" class=\"jobs-header\">TV</h2>";
 echo "      <div class=\"cont-4-font\">Status:";
 echo "      <button type=\"button\" id=\"btn-tv-off\" class=\"btn btn-default\">Off</button>";
+echo "       <button onclick=\"eccoHello()\">Say Hello</button>";
 echo "      </div>";
 echo "    </div>";
 echo "  </div>";
