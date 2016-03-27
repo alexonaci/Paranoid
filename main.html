@@ -69,6 +69,7 @@
 
 
 
+<script type="text/javascript" src="http://code.jquery.com/jquery-2.2.1.min.js"></script>
 <script>
 var url="http://192.168.1.88/hackaton/relay.php?command=";
 
@@ -80,18 +81,30 @@ $.get(url + "r")
 		});
  }
 
+function getLuminosity(){
+    $.get(url + "l")
+	.success( function(data){
+	   // lightOn = "off.png";
+	   // lightOff = "on.png"; 
+	   // $("#luminosity").attr('src', light === lightOn ? lightOff : light On) ;
+	})
+}
 function getTemperature(){
     $.get(url + "t")
 	.success( function(data) { 
-	    $("#temp").html(data + "C");
+	    if(data!=="abc")
+		$("#temp").html(data + "C");
+		setTimeout(getLuminosity,4000);
 	})
 }
 
 function getHumidity(){
    $.get(url + "h")
 	.success( function(data){
-	    $("#hum").html(data + "%");
-	)}
+	    if(data!=="abc")
+	    	$("#hum").html(data + "%");
+	    setTimeout(getTemperature,10000);
+	})
 }
 
 function switchTV(){
@@ -100,9 +113,13 @@ function switchTV(){
 	   $("#tv-button").hasClass("btn-danger") === true ? 
 		$("#tv-button").removeClass("btn-danger").addClass("btn-success") : 
 		$("#tv-button").removeClass("btn-success").addClass("btn-danger"); 
+	})
 }
+
+$("#tv-button").click(switchTV);
+$(".btn.btn-default").click(activateRelay);
+setInterval(getHumidity,10000);
 </script>
-<script type="text/javascript" src="http://code.jquery.com/jquery-2.2.1.min.js"></script>
 <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 </body>
 </html>
