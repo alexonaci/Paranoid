@@ -39,7 +39,7 @@
 
   <div class="row text-center">
     <div class="col-sm-2 col-sm-offset-1" class="jobs">
-      <h2 class="header-default" class="jobs-header"><img width=75 src="off.png"></h2>
+      <h2 class="header-default" class="jobs-header"><img id="luminosity" width=75 src="off.png"></h2>
       <h3 id="humi">Light: </h3>
     </div>
 
@@ -81,29 +81,18 @@ $.get(url + "r")
 		});
  }
 
-function getLuminosity(){
-    $.get(url + "l")
-	.success( function(data){
-	   // lightOn = "off.png";
-	   // lightOff = "on.png"; 
-	   // $("#luminosity").attr('src', light === lightOn ? lightOff : light On) ;
-	})
-}
-function getTemperature(){
-    $.get(url + "t")
-	.success( function(data) { 
-	    if(data!=="abc")
-		$("#temp").html(data + "C");
-		setTimeout(getLuminosity,4000);
-	})
-}
-
-function getHumidity(){
-   $.get(url + "h")
-	.success( function(data){
-	    if(data!=="abc")
-	    	$("#hum").html(data + "%");
-	    setTimeout(getTemperature,10000);
+function getLuminosityTemperatureHumidity(){
+    $.get(url + "thl")
+	.success( function(data){ 
+	    if(data!=="abc"){
+	      var light = $("#luminosity").attr('src');
+	      var lightOn = "off.png";
+	      var lightOff = "on.png"; 
+	      var parsedJSON = JSON.parse(data);
+	      $("#luminosity").attr('src', parsedJSON.lumina ? lightOn : lightOff) ;
+	      $("#temp").html(parsedJSON.temp + "C");
+              $("#hum").html(parsedJSON.humidity + "%");
+	    }
 	})
 }
 
@@ -116,9 +105,10 @@ function switchTV(){
 	})
 }
 
+//event binders
 $("#tv-button").click(switchTV);
 $(".btn.btn-default").click(activateRelay);
-setInterval(getHumidity,10000);
+setInterval(getLuminosityTemperatureHumidity,5000);
 </script>
 <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 </body>
