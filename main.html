@@ -69,7 +69,39 @@
 
 
 
+<script>
+var url="http://192.168.1.88/hackaton/relay.php?command=";
 
+function activateRelay()
+{
+$.get(url + "r")
+           	.success( function(data){
+                        $("#test").html(data);
+		});
+ }
+
+function getTemperature(){
+    $.get(url + "t")
+	.success( function(data) { 
+	    $("#temp").html(data + "C");
+	})
+}
+
+function getHumidity(){
+   $.get(url + "h")
+	.success( function(data){
+	    $("#hum").html(data + "%");
+	)}
+}
+
+function switchTV(){
+   $.get(url + "tv")
+	.success( function(data){
+	   $("#tv-button").hasClass("btn-danger") === true ? 
+		$("#tv-button").removeClass("btn-danger").addClass("btn-success") : 
+		$("#tv-button").removeClass("btn-success").addClass("btn-danger"); 
+}
+</script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-2.2.1.min.js"></script>
 <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 </body>
