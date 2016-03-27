@@ -5,6 +5,7 @@
 	<link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 	<link rel="stylesheet" type="text/css" href="style.css">
+	<script   src="https://code.jquery.com/jquery-2.2.2.min.js"   integrity="sha256-36cp2Co+/62rEAAYHLmRCPIych47CvdM+uTBJwSzWjI="   crossorigin="anonymous"></script>
 </head>
 <body id="main-body">
 <nav class="navbar navbar-inverse">
@@ -29,40 +30,44 @@
       <!-- <ul class="nav navbar-nav navbar-right">
         <li><a href="#">Sign up <i class="fa fa-user-plus"></i></a></li>
         <li><a href="#">Log in <i class="fa fa-user"></i></a></li>
-
+ 	 <div id="test"></div>
       </ul> -->
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
 <script>
+var url="http://192.168.1.88/hackaton/relay.php?command=";
 
-
-function eccoHello()
+function activateRelay()
 {
-$.get("http://192.168.1.88/hackaton/relay.php")
-                .success( function(data){
+$.get(url + "r")
+           	.success( function(data){
                         $("#test").html(data);
-                });
+		});
  }
-</script>
 
-
-<?php
-$dir = 'sqlite:/var/db/arduino.db';
-$db  = new PDO($dir) or die("cannot open the database");
-$result = $db->query('select status FROM sensor1');
-foreach($result as $row)
-{
-  $state = $row['status'];
+function getTemperature(){
+    $.get(url + "t")
+	.success( function(data) { 
+	    $("#temp").html(data + "C");
+	})
 }
-if ($state == 0)
-$becpath = "on.png";
-else
-$becpath = "off.png";
 
-$db = NULL;
+function getHumidity(){
+   $.get(url + "h")
+	.success( function(data){
+	    $("#hum").html(data + "%");
+	)}
+}
 
-?>
+function switchTV(){
+   $.get(url + "tv")
+	.success( function(data){
+	   $("#tv-button").hasClass("btn-danger") === true ? 
+		$("#tv-button").removeClass("btn-danger").addClass("btn-success") : 
+		$("#tv-button").removeClass("btn-success").addClass("btn-danger"); 
+}
+</script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-2.2.1.min.js"></script>
 <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 </body>

@@ -8,7 +8,7 @@ serial_bauds = 9600;
 # store the temperature in the database
 def log_light(value):
 
-    conn=sqlite3.connect('/var/db/arduino.db')
+    conn=sqlite3.connect('/var/www/hackaton/arduino.db')
     curs=conn.cursor()
 
     curs.execute("UPDATE sensor1 set status = (?)", (value,))
