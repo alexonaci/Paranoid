@@ -6,8 +6,17 @@ $serial->confBaudRate(9600);
 $serial->confParity("none");
 $serial->confCharacterLength(8);
 $serial->confStopBits(1);
-$serial->confFlowControl("none");
+$serial->confFlowControl("none"); 
 $serial->deviceOpen();
-sleep(3);
-$serial->sendMessage("R"); // send char R to arduino to actuate relay
+sleep(2);
+$serial->sendMessage($_GET["command"]);
+sleep(2);
+$read = $serial->readPort();
+if(strcmp("", $read) == 0)
+{
+	sleep(0.2);
+	$read = $serial->readPort();
+	echo "abc";
+}
+echo $read;
 ?>
