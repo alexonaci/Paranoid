@@ -26,7 +26,7 @@ Paranoid is Yet Another Arduino IoT Web App written in HTML with elements of jav
 
 ### Hackathon
 
-This is a product of the #HomeHackers Hackathon 26.03.2016 held by Academy+Plus, a collaboration between Created by Chirila Cezar, Bira Gabriel (MVP), Daniel Lupaescu, Chindris Mihai and Onaci Alexandru.
+This is a product of the #HomeHackers Hackathon 26.03.2016 held by Academy+Plus, a collaboration between Bira Gabriel (MVP), Chindris Mihai, Chirila Cezar, Daniel Lupaescu and Onaci Alexandru.
 
 
 
