@@ -10,11 +10,10 @@ $serial->confFlowControl("none");
 $serial->deviceOpen();
 sleep(2);
 $serial->sendMessage($_GET["command"]);
-sleep(2);
+sleep(1);
 $read = $serial->readPort();
 if(strcmp("", $read) == 0)
 {
-	sleep(0.2);
 	$read = $serial->readPort();
 	echo "abc";
 }
