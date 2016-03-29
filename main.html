@@ -39,31 +39,31 @@
 
   <div class="row text-center">
     <div class="col-sm-2 col-sm-offset-1" class="jobs">
-      <h2 class="header-default" class="jobs-header"><img id="luminosity" width=75 src="off.png"></h2>
+      <h2 class="header-default" class="jobs-header"><img id="luminosity" width=75 src="img/off.png"></h2>
       <h3 id="humi">Light: </h3>
     </div>
 
     <div class="col-sm-2" class="jobs">
-      <h2 class="header-default" class="jobs-header"><img width=230 src="http://graphiccave.com/wp-content/uploads/2015/04/Wide-Screen-TV-PNG-Graphic-Cave.png"></h2>
+      <h2 class="header-default" class="jobs-header"><img width=230 src="img/TV.png"></h2>
       <h3>TV</h3>
         <button type="button" id="tv-button" class="btn btn-danger"><span class="glyphicon glyphicon-off"></span>On/Off</button>
 
     
     </div>
     <div class="col-sm-2" class="jobs">
-      <h2 class="header-default" class="jobs-header"><img width=100 src="https://emojipedia-us.s3.amazonaws.com/cache/ea/80/ea80146688caa8ffae5e7718e069ab0c.png"></h2>
+      <h2 class="header-default" class="jobs-header"><img width=100 src="img/temp.png"></h2>
       <h3>Temperature: </h3>
       <div id="temp"></div>
     </div>
     <div class="col-sm-2" class="jobs">
-      <h2 class="header-default" class="jobs-header"><img width=100 src="http://icons.iconarchive.com/icons/icons8/android/128/Measurement-Units-Humidity-icon.png"></h2>
+      <h2 class="header-default" class="jobs-header"><img width=100 src="img/hum.png"></h2>
       <h3>Humidity: </h3>
       <div id="hum"></div>
     </div>
     <div class="col-sm-2" class="jobs">
-      <h2 class="header-default" class="jobs-header"><img id="alarm" width=100 src="http://www.clker.com/cliparts/e/b/6/f/1259701043447318680purzen_House_icon.svg.hi.png"></h2>
+      <h2 class="header-default" class="jobs-header"><img id="alarm" width=100 src="img/houseOK.png"></h2>
      <h3>Flood Alarm</h3>
-	<div id="hum"></div> 
+	<div id="alarm"></div> 
  </div>
   </div>
 
@@ -86,14 +86,14 @@ function getLuminosityTemperatureHumidity(){
 	.success( function(data){ 
 	    if(data!=="abc"){
 	      var light = $("#luminosity").attr('src');
-	      var lightOn = "off.png";
-	      var lightOff = "on.png";
-	      var houseOk = "http://www.clker.com/cliparts/e/b/6/f/1259701043447318680purzen_House_icon.svg.hi.png";
-	      var houseNOk = "https://cdn4.iconfinder.com/data/icons/eldorado-weather/40/flood-512.png"; 
+	      var lightOn = "img/off.png";
+	      var lightOff = "img/on.png";
+	      var houseOk = "img/houseOK.png";
+	      var houseNOk = "img/houseNOK.png"; 
 	      var parsedJSON = JSON.parse(data);
 	      $("#luminosity").attr('src', parsedJSON.lumina ? lightOn : lightOff) ;
 	      $("#temp").html(parsedJSON.temp + "C");
-              $("#hum").html(parsedJSON.humidity + "%");
+          $("#hum").html(parsedJSON.humidity + "%");
 	    }
 	})
 }
