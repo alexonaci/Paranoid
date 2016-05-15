@@ -12,10 +12,11 @@ sleep(2);
 $serial->sendMessage($_GET["command"]);
 sleep(1);
 $read = $serial->readPort();
-while(strcmp("", $read) == 0)
-{
+if($_GET["command"] == "thl"){
+while(strcmp("", $read) == 0){
 	$read = $serial->readPort();
 }
 $serial->sendMessage("ok");
 echo $read;
+}
 ?>
