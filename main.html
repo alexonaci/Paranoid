@@ -25,90 +25,58 @@
       <ul class="nav navbar-nav">
         <li><a href="index.html">Home</a></li>
       </ul>
-      <!-- <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Sign up <i class="fa fa-user-plus"></i></a></li>
-        <li><a href="#">Log in <i class="fa fa-user"></i></a></li>
-       
+
       </ul> -->
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
-  <div class="container" id="space">
-    
-  </div>
 
-  <div class="row text-center">
-    <div class="col-sm-2 col-sm-offset-1" class="jobs">
-      <h2 class="header-default" class="jobs-header"><img id="luminosity" width=75 src="img/off.png"></h2>
-      <h3 id="humi">Light: </h3>
-    </div>
+ <div class="row text-center">
+ 	 <div class="col-sm-2 col-sm-offset-1" class="jobs">
+ 	 </div>
 
     <div class="col-sm-2" class="jobs">
-      <h2 class="header-default" class="jobs-header"><img width=230 src="img/TV.png"></h2>
-      <h3>TV</h3>
-        <button type="button" id="tv-button" class="btn btn-danger"><span class="glyphicon glyphicon-off"></span>On/Off</button>
-
-    
+      <h2 class="header-default" class="jobs-header"><img width=100 src="img/off.png"></h2>
+   
+        <button type="button" id="led-button" class="btn btn-danger"><span class="glyphicon glyphicon-off"></span>On/Off</button>    
     </div>
+
     <div class="col-sm-2" class="jobs">
       <h2 class="header-default" class="jobs-header"><img width=100 src="img/temp.png"></h2>
       <h3>Temperature: </h3>
       <div id="temp"></div>
     </div>
+
     <div class="col-sm-2" class="jobs">
       <h2 class="header-default" class="jobs-header"><img width=100 src="img/hum.png"></h2>
       <h3>Humidity: </h3>
       <div id="hum"></div>
     </div>
-    <div class="col-sm-2" class="jobs">
-      <h2 class="header-default" class="jobs-header"><img id="alarm" width=100 src="img/houseOK.png"></h2>
-     <h3>Flood Alarm</h3>
-	<div id="alarm"></div> 
  </div>
-  </div>
-
 
 
 <script type="text/javascript" src="http://code.jquery.com/jquery-2.2.1.min.js"></script>
 <script>
 var url="relay.php?command=";
 
-function activateRelay()
-{
-$.get(url + "r")
-           	.success( function(data){
-                        $("#test").html(data);
-		});
- }
 
 function getLuminosityTemperatureHumidity(){
     $.get(url + "thl")
 	.success( function(data){ 
-	    if(data!=="abc"){
-	      var light = $("#luminosity").attr('src');
-	      var lightOn = "img/off.png";
-	      var lightOff = "img/on.png";
-	      var houseOk = "img/houseOK.png";
-	      var houseNOk = "img/houseNOK.png"; 
+	    if(data!==""){
 	      var parsedJSON = JSON.parse(data);
-	      $("#luminosity").attr('src', parsedJSON.lumina ? lightOn : lightOff) ;
 	      $("#temp").html(parsedJSON.temp + "C");
           $("#hum").html(parsedJSON.humidity + "%");
 	    }
 	})
 }
 
-function switchTV(){
-   $.get(url + "tv")
-	.success( function(data){
-	   $("#tv-button").hasClass("btn-danger") === true ? 
-		$("#tv-button").removeClass("btn-danger").addClass("btn-success") : 
-		$("#tv-button").removeClass("btn-success").addClass("btn-danger"); 
-	})
+function blinkLED(){
+   $.get(url + "led")	
 }
 
 //event binders
-$("#tv-button").click(switchTV);
+$("#led-button").click(blinkLED);
 setInterval(getLuminosityTemperatureHumidity,10000);
 </script>
 <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
